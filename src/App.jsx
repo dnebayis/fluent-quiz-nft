@@ -570,11 +570,11 @@ const App = () => {
   };
 
   // Twitter paylaşım fonksiyonu
-const handleShareOnTwitter = () => {
-  const tweetText = "I just completed the Fluent Quiz NFT Challenge! Join me and mint your own FluentNFT! 🚀 @fluentxyz #FluentNFT https://fluent-quiz-nft.vercel.app";
-  const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
-  window.open(tweetUrl, '_blank');
-};
+  const handleShareOnTwitter = () => {
+    const tweetText = "I just completed the Fluent Quiz NFT Challenge! Join me and mint your own FluentNFT! 🚀 @fluentxyz #FluentNFT [YourPageLink]";
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+    window.open(tweetUrl, '_blank');
+  };
 
   return (
     <Stack
@@ -605,7 +605,10 @@ const handleShareOnTwitter = () => {
           },
         }}
       >
-        <Image src="/assets/fluent-logo.png" alt="FluentQuizNFT Logo" width={120} />
+        {/* Logo: Sol üst köşede */}
+        <Image src="/assets/new-fluent-logo.png" alt="FluentQuizNFT Logo" width={120} />
+
+        {/* Connect Wallet Butonu: En sağ üst köşede */}
         {!walletConnected && (
           <PrimaryButton
             text="Connect Wallet"

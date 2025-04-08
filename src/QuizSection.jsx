@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Text, PrimaryButton, Link } from '@fluentui/react';
 
-// Fluent projesine özel 10 soru (4 şıklı)
+// Fluent projesine özel 10 soru (4 şıklı, doğru cevaplar karıştırıldı)
 const questions = [
   {
     question: "What is the primary purpose of the Fluent project?",
@@ -21,7 +21,7 @@ const questions = [
       { key: 'C', text: 'EVM, Wasm, and SVM' },
       { key: 'D', text: 'Only Wasm' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'D',
   },
   {
     question: "What type of network is Fluent built on?",
@@ -31,7 +31,7 @@ const questions = [
       { key: 'C', text: 'A centralized server' },
       { key: 'D', text: 'A hybrid cloud network' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'A',
   },
   {
     question: "Which programming languages can developers use to write smart contracts on Fluent?",
@@ -41,7 +41,7 @@ const questions = [
       { key: 'C', text: 'Java and Python' },
       { key: 'D', text: 'C++ and JavaScript' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'C',
   },
   {
     question: "What is the name of the zero-knowledge technology Fluent uses for efficient execution?",
@@ -51,7 +51,7 @@ const questions = [
       { key: 'C', text: 'zkProof' },
       { key: 'D', text: 'zkRollup' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'A',
   },
   {
     question: "What does 'blended execution' mean in the context of Fluent?",
@@ -61,7 +61,7 @@ const questions = [
       { key: 'C', text: 'Blending user interfaces for better UX' },
       { key: 'D', text: 'Merging centralized and decentralized systems' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'D',
   },
   {
     question: "What is one benefit of using Wasm in Fluent for developers?",
@@ -81,7 +81,7 @@ const questions = [
       { key: 'C', text: 'Private Testnet' },
       { key: 'D', text: 'Alpha Testing' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'C',
   },
   {
     question: "Which of the following is an example of a blended application on Fluent?",
@@ -101,7 +101,7 @@ const questions = [
       { key: 'C', text: 'To replace smart contracts with traditional software' },
       { key: 'D', text: 'To develop a new consensus mechanism' },
     ],
-    correctAnswer: 'B',
+    correctAnswer: 'D',
   },
 ];
 
@@ -118,16 +118,17 @@ const QuizSection = ({ setQuizCompleted }) => {
     } else {
       setAnswerStatus('incorrect');
     }
-  };
 
-  const handleNextQuestion = () => {
-    setCurrentQuestion(currentQuestion + 1);
-    setSelectedAnswer(null);
-    setAnswerStatus(null);
+    // 2 saniye sonra otomatik olarak bir sonraki soruya geç
+    setTimeout(() => {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setAnswerStatus(null);
 
-    if (currentQuestion + 1 === questions.length) {
-      setQuizCompleted(true);
-    }
+      if (currentQuestion + 1 === questions.length) {
+        setQuizCompleted(true);
+      }
+    }, 2000); // 2 saniye bekle
   };
 
   return (
@@ -189,13 +190,13 @@ const QuizSection = ({ setQuizCompleted }) => {
                         border: '2px solid #DFE6E9',
                         cursor: 'pointer',
                         width: 300,
-                        height: 100, // Yükseklik artırıldı, metinler için daha fazla alan
+                        height: 100,
                         textAlign: 'center',
                         transition: 'all 0.3s ease',
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                        display: 'flex', // Metni dikey olarak ortalamak için
-                        alignItems: 'center', // Dikey ortalama
-                        justifyContent: 'center', // Yatay ortalama
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         ':hover': {
                           backgroundColor: selectedAnswer === option.key ? '#5A4BDB' : '#E2E8F0',
                           transform: 'scale(1.02)',
@@ -204,11 +205,11 @@ const QuizSection = ({ setQuizCompleted }) => {
                     }}
                   >
                     <Text
-                      variant="medium" // Yazı boyutu küçültüldü (large -> medium)
+                      variant="medium"
                       styles={{
                         root: {
-                          whiteSpace: 'normal', // Metin birden fazla satıra yayılabilir
-                          lineHeight: '1.4', // Satır aralığı artırıldı, okunabilirlik için
+                          whiteSpace: 'normal',
+                          lineHeight: '1.4',
                         },
                       }}
                     >
@@ -233,7 +234,7 @@ const QuizSection = ({ setQuizCompleted }) => {
                         border: '2px solid #DFE6E9',
                         cursor: 'pointer',
                         width: 300,
-                        height: 100, // Yükseklik artırıldı
+                        height: 100,
                         textAlign: 'center',
                         transition: 'all 0.3s ease',
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -248,7 +249,7 @@ const QuizSection = ({ setQuizCompleted }) => {
                     }}
                   >
                     <Text
-                      variant="medium" // Yazı boyutu küçültüldü
+                      variant="medium"
                       styles={{
                         root: {
                           whiteSpace: 'normal',
@@ -263,41 +264,20 @@ const QuizSection = ({ setQuizCompleted }) => {
               </Stack>
             </Stack>
 
-            {/* Submit ve Next Butonları */}
+            {/* Submit Butonu */}
             {answerStatus ? (
-              <>
-                <Text
-                  variant="large"
-                  styles={{
-                    root: {
-                      color: answerStatus === 'correct' ? '#28A745' : '#DC3545',
-                      textAlign: 'center',
-                      marginTop: 10,
-                    },
-                  }}
-                >
-                  {answerStatus === 'correct' ? 'Correct!' : `Incorrect! Correct answer: ${questions[currentQuestion].correctAnswer}`}
-                </Text>
-                <PrimaryButton
-                  text="Next Question"
-                  onClick={handleNextQuestion}
-                  styles={{
-                    root: {
-                      backgroundColor: '#FE6901',
-                      borderColor: '#FE6901',
-                      borderRadius: 8,
-                      marginTop: 20,
-                    },
-                    rootHovered: {
-                      backgroundColor: '#E65D00',
-                      borderColor: '#E65D00',
-                    },
-                    text: {
-                      color: '#FFFFFF',
-                    },
-                  }}
-                />
-              </>
+              <Text
+                variant="large"
+                styles={{
+                  root: {
+                    color: answerStatus === 'correct' ? '#28A745' : '#DC3545',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  },
+                }}
+              >
+                {answerStatus === 'correct' ? 'Correct!' : `Incorrect! Correct answer: ${questions[currentQuestion].correctAnswer}`}
+              </Text>
             ) : (
               <PrimaryButton
                 text="Submit Answer"
@@ -336,7 +316,7 @@ const QuizSection = ({ setQuizCompleted }) => {
         )}
       </Stack>
 
-      {/* Twitter Linki: Sağ alt köşede */}
+      {/* Twitter Linkleri: Sağ alt köşede */}
       <Stack
         styles={{
           root: {
@@ -345,6 +325,7 @@ const QuizSection = ({ setQuizCompleted }) => {
             right: 10,
           },
         }}
+        tokens={{ childrenGap: 5 }} // Linkler arasında boşluk
       >
         <Link
           href="https://x.com/0xshawtyy"
@@ -357,6 +338,18 @@ const QuizSection = ({ setQuizCompleted }) => {
           }}
         >
           @0xshawtyy
+        </Link>
+        <Link
+          href="https://x.com/fluentxyz"
+          target="_blank"
+          styles={{
+            root: {
+              color: '#1DA1F2',
+              fontSize: 14,
+            },
+          }}
+        >
+          @fluentxyz
         </Link>
       </Stack>
     </Stack>
