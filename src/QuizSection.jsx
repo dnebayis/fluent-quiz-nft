@@ -11,7 +11,7 @@ const questions = [
       { key: 'C', text: 'To replace Ethereum with a new blockchain' },
       { key: 'D', text: 'To build a centralized application platform' },
     ],
-    correctAnswer: 'B', // Doğru
+    correctAnswer: 'B',
   },
   {
     question: "Which virtual machines (VMs) does Fluent currently support for smart contract execution?",
@@ -21,7 +21,7 @@ const questions = [
       { key: 'C', text: 'EVM, Wasm, and SVM' },
       { key: 'D', text: 'Only Wasm' },
     ],
-    correctAnswer: 'B', // Düzeltildi: D -> B
+    correctAnswer: 'B',
   },
   {
     question: "What type of network is Fluent built on?",
@@ -31,7 +31,7 @@ const questions = [
       { key: 'C', text: 'A centralized server' },
       { key: 'D', text: 'A hybrid cloud network' },
     ],
-    correctAnswer: 'B', // Düzeltildi: A -> B
+    correctAnswer: 'B',
   },
   {
     question: "Which programming languages can developers use to write smart contracts on Fluent?",
@@ -41,7 +41,7 @@ const questions = [
       { key: 'C', text: 'Java and Python' },
       { key: 'D', text: 'C++ and JavaScript' },
     ],
-    correctAnswer: 'B', // Düzeltildi: C -> B
+    correctAnswer: 'B',
   },
   {
     question: "What is the name of the zero-knowledge technology Fluent uses for efficient execution?",
@@ -51,7 +51,7 @@ const questions = [
       { key: 'C', text: 'zkProof' },
       { key: 'D', text: 'zkRollup' },
     ],
-    correctAnswer: 'B', // Düzeltildi: A -> B
+    correctAnswer: 'B',
   },
   {
     question: "What does 'blended execution' mean in the context of Fluent?",
@@ -61,7 +61,7 @@ const questions = [
       { key: 'C', text: 'Blending user interfaces for better UX' },
       { key: 'D', text: 'Merging centralized and decentralized systems' },
     ],
-    correctAnswer: 'B', // Düzeltildi: D -> B
+    correctAnswer: 'B',
   },
   {
     question: "What is one benefit of using Wasm in Fluent for developers?",
@@ -71,7 +71,7 @@ const questions = [
       { key: 'C', text: 'It eliminates the need for Ethereum compatibility' },
       { key: 'D', text: 'It reduces transaction fees on Ethereum' },
     ],
-    correctAnswer: 'B', // Doğru
+    correctAnswer: 'B',
   },
   {
     question: "What stage is Fluent in as of June 2024?",
@@ -81,7 +81,7 @@ const questions = [
       { key: 'C', text: 'Private Testnet' },
       { key: 'D', text: 'Alpha Testing' },
     ],
-    correctAnswer: 'B', // Düzeltildi: C -> B
+    correctAnswer: 'B',
   },
   {
     question: "Which of the following is an example of a blended application on Fluent?",
@@ -91,7 +91,7 @@ const questions = [
       { key: 'C', text: 'A centralized database system' },
       { key: 'D', text: 'A mobile app for social media' },
     ],
-    correctAnswer: 'A', // Doğru
+    correctAnswer: 'A',
   },
   {
     question: "What is Fluent’s mission according to its official website?",
@@ -101,7 +101,7 @@ const questions = [
       { key: 'C', text: 'To replace smart contracts with traditional software' },
       { key: 'D', text: 'To develop a new consensus mechanism' },
     ],
-    correctAnswer: 'B', // Düzeltildi: D -> B
+    correctAnswer: 'B',
   },
 ];
 
@@ -316,7 +316,7 @@ const QuizSection = ({ setQuizCompleted }) => {
         )}
       </Stack>
 
-      {/* Twitter Linkleri: Sağ alt köşede */}
+      {/* Twitter Linki: Sağ alt köşede */}
       <Stack
         styles={{
           root: {
@@ -325,7 +325,6 @@ const QuizSection = ({ setQuizCompleted }) => {
             right: 10,
           },
         }}
-        tokens={{ childrenGap: 5 }} // Linkler arasında boşluk
       >
         <Link
           href="https://x.com/0xshawtyy"
@@ -338,18 +337,6 @@ const QuizSection = ({ setQuizCompleted }) => {
           }}
         >
           @0xshawtyy
-        </Link>
-        <Link
-          href="https://x.com/fluentxyz"
-          target="_blank"
-          styles={{
-            root: {
-              color: '#1DA1F2',
-              fontSize: 14,
-            },
-          }}
-        >
-          @fluentxyz
         </Link>
       </Stack>
     </Stack>
